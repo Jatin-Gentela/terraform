@@ -1,19 +1,13 @@
-provider "aws" {
-  access_key = "AKIAWDQ7Y3DRBKVC74HO"
-  secret_key = "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" 
-  region = "us-east-1"
-}
+
 
 variable "instance" {
-    type = string
-    default = ["ami-03a6eaae9938c858c"]
 }
 
 locals {
-  instance_type = "t2.micro"  
+  instance_type = "t2.micro"
   common_tags = {
-    Department = "Development"
-    Owner   = "omita"
+    Department  = "Development"
+    Owner       = "omita"
     Environment = "Development"
   }
 }
@@ -26,15 +20,15 @@ resource "aws_vpc" "my_vpc" {
 }
 
 resource "aws_instance" "web" {
-  ami           = var.instance.default
+  ami           = var.instance
   instance_type = local.instance_type
 
   tags = merge(
     local.common_tags,
     {
-    Description = "Apache Server"
+      Description = "Apache Server"
     }
-  ) 
+  )
 }
 
 resource "aws_security_group" "my_SG" {
@@ -43,11 +37,11 @@ resource "aws_security_group" "my_SG" {
   vpc_id      = "vpc-05a5bd49457d641f4"
 
   ingress {
-    description      = "TLS from VPC"
-    from_port        = 443
-    to_port          = 443
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    description = "TLS from VPC"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   tags = local.common_tags
 }
