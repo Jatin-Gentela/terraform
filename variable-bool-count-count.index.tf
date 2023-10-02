@@ -1,5 +1,3 @@
-}
-
 variable "instance" {
     type = string
     default = ["ami-03a6eaae9938c858c"]
