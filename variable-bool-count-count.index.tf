@@ -1,7 +1,3 @@
-provider "aws" {
-  access_key = "AKIAWDQ7Y3DRBKVC74HO"
-  secret_key = "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" 
-  region = "us-east-1"
 }
 
 variable "instance" {
